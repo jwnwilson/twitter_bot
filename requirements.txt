@@ -1,2 +1,7 @@
-Fabric==1.10.1
-django==1.8.8
+Django==1.8.8
+pycrypto==2.6.1
+Fabric==1.10.2
+argparse==1.2.1
+paramiko==1.16.0
+
+wsgiref==0.1.2

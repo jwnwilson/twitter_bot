@@ -8,6 +8,7 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN apt-get update
 RUN apt-get install -y python python-pip wget
 RUN apt-get install -y git python-virtualenv
+RUN apt-get install -y python-dev
 
 # Make ssh dir
 #RUN mkdir /root/.ssh/
@@ -31,7 +32,7 @@ RUN virtualenv env
 # Clone the conf files into the docker container
 RUN git clone https://github.com/jwnwilson/twitter_bot.git
 RUN source /home/env/bin/activate
-RUN pip install twitter_bot/requirements.txt
+RUN pip install /home/twitter_bot/requirements.txt
 
 
 
