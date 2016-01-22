@@ -9,6 +9,18 @@ def web():
     run_manage('runserver 0.0.0.0:8888')
 
 
+def docker_compose():
+    local("docker-compose up")
+
+
+def docker_ip(machine_name="default"):
+    """
+    Run with 'fab docker_ip:$MACHINE_NAME'
+    :param machine_name: docker image name
+    :return: ip address of docker instance to connect to in a browser
+    """
+    local("docker-machine ip %s" % machine_name)
+
 def migrate():
     run_manage('migrate')
 
