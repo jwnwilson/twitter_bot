@@ -1,5 +1,5 @@
 #
-# Super simple example of a Dockerfile
+# Build a simple ubuntu container and load our django web app
 #
 FROM ubuntu:latest
 MAINTAINER Noel Wilson "jwnwilson@hotmail.co.uk"
@@ -10,6 +10,7 @@ RUN apt-get install -y python python-pip wget
 RUN apt-get install -y git python-virtualenv
 RUN apt-get install -y python-dev
 
+# Left as reference for working with private repositories later
 # Make ssh dir
 #RUN mkdir /root/.ssh/
 
@@ -32,7 +33,7 @@ RUN virtualenv env
 # Clone the conf files into the docker container
 RUN git clone https://github.com/jwnwilson/twitter_bot.git
 RUN source /home/env/bin/activate
-RUN pip install /home/twitter_bot/requirements.txt
+RUN pip install -r twitter_bot/requirements.txt
 
 
 
