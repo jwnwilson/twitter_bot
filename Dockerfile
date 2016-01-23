@@ -29,6 +29,7 @@ RUN virtualenv venv
 # Clone the master branch into /home run if $DEV != 1
 RUN git clone https://github.com/jwnwilson/twitter_bot.git
 RUN source /home/venv/bin/activate;pip install -r /home/twitter_bot/requirements.txt
+ADD ./shell_scripts/run_server.sh /home/twitter_bot/shell_scripts/run_server.sh
 RUN chmod 755 /home/twitter_bot/shell_scripts/run_server.sh
 
 # Append virtual env source to .bashrc

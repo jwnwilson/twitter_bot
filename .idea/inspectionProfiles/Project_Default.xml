@@ -1,0 +1,24 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="11">
+            <item index="0" class="java.lang.String" itemvalue="paramiko" />
+            <item index="1" class="java.lang.String" itemvalue="Django" />
+            <item index="2" class="java.lang.String" itemvalue="Fabric" />
+            <item index="3" class="java.lang.String" itemvalue="pycrypto" />
+            <item index="4" class="java.lang.String" itemvalue="argparse" />
+            <item index="5" class="java.lang.String" itemvalue="psycopg2" />
+            <item index="6" class="java.lang.String" itemvalue="ecdsa" />
+            <item index="7" class="java.lang.String" itemvalue="freeze" />
+            <item index="8" class="java.lang.String" itemvalue="oauth2" />
+            <item index="9" class="java.lang.String" itemvalue="python-openid" />
+            <item index="10" class="java.lang.String" itemvalue="django-social-auth" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,0 +1,17 @@
+db:
+  image: postgres
+  restart: always
+  ports:
+    - "5432:5432"
+web:
+  restart: always
+  build: .
+  env_file:
+    - ./shell_scripts/twitter_creds.env
+  command: /home/twitter_bot/shell_scripts/run_server.sh
+  volumes:
+    - .:/home/twitter_bot
+  ports:
+    - "8000:8000"
+  links:
+    - db
