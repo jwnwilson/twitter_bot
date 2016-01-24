@@ -28,6 +28,7 @@ WORKDIR /home
 RUN virtualenv venv
 
 # Clone the master branch into /home run if $DEV != 1
+RUN echo "cache buster"
 RUN git clone https://github.com/jwnwilson/twitter_bot.git
 RUN source /home/venv/bin/activate;pip install -r /home/twitter_bot/requirements.txt
 RUN source /home/venv/bin/activate;pip install https://github.com/jwnwilson/twitter-application-only-auth/archive/master.zip
