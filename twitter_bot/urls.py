@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     )
 
 urlpatterns += patterns('twitter_bot.views',
-        url(r'^$', 'home', name='home')
+        url(r'^$', 'home', name='home'),
+        url(r'^hash_tag_battle/', 'hash_tag_battle', name='hash_tag_battle'),
     )
 

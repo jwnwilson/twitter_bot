@@ -10,6 +10,7 @@ RUN apt-get install -y python python-pip wget
 RUN apt-get install -y git python-virtualenv
 RUN apt-get install -y python-dev
 RUN apt-get install -y libpq-dev
+RUN apt-get install -y python-enchant
 
 # Left as reference for working with private repositories later
 # Make ssh dir
@@ -29,12 +30,13 @@ RUN virtualenv venv
 # Clone the master branch into /home run if $DEV != 1
 RUN git clone https://github.com/jwnwilson/twitter_bot.git
 RUN source /home/venv/bin/activate;pip install -r /home/twitter_bot/requirements.txt
+RUN source /home/venv/bin/activate;pip install https://github.com/jwnwilson/twitter-application-only-auth/archive/master.zip
 ADD ./shell_scripts/run_server.sh /home/twitter_bot/shell_scripts/run_server.sh
 RUN chmod 755 /home/twitter_bot/shell_scripts/run_server.sh
 
 # Append virtual env source to .bashrc
-echo "# Source virtual env on shell shartup" >> /root/.bashrc
-echo "source /home/venv/bin/activate" >> /root/.bashrc
+RUN echo "# Source virtual env on shell shartup" >> /root/.bashrc
+RUN echo "source /home/venv/bin/activate" >> /root/.bashrc
 
 # Port to expose
 EXPOSE 8000

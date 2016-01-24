@@ -30,7 +30,7 @@ def docker_compose(build=None, prod=None):
     else:
         compose_file = "-f docker-compose-dev.yml"
 
-    local("docker-compose %s %s" % (compose_file, cmd))
+    local("docker-compose %s %s " % (compose_file, cmd))
 
 
 def docker_ip(machine_name="default"):

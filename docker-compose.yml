@@ -1,5 +1,5 @@
 db:
-  image: postgres
+  build: ./postgres
   restart: always
   ports:
     - "5432:5432"
@@ -9,6 +9,8 @@ web:
   env_file:
     - ./shell_scripts/twitter_creds.env
   command: /home/twitter_bot/shell_scripts/run_server.sh
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
   ports:
     - "8000:8000"
   links:

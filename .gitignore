@@ -2,3 +2,4 @@
 *.pyc
 venv
 shell_scripts/twitter_creds.env
+shell_scripts/twitter_env_var.sh
