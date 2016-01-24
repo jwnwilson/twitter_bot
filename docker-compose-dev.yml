@@ -11,6 +11,7 @@ web:
   command: /home/twitter_bot/shell_scripts/run_server.sh
   volumes:
     - .:/home/twitter_bot
+    - /etc/localtime:/etc/localtime:ro
   ports:
     - "8000:8000"
   links:
