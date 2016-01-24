@@ -68,11 +68,23 @@ def requirements():
 
 
 def test():
-    run_manage('test items stream')
+    run_manage('test')
 
 
 def create_test_data():
     run_manage('dumpdata stream items auth.user --indent 2 > testsite/test_data.json')
+
+
+def hash_tag_battle(id):
+    """
+    Get the results of a hash tag battle
+    :param id: battle id of battle created in admin console
+    :return: None
+    """
+    if id:
+        local("python ./py_scripts/battle_request.py %s" % id)
+    else:
+        print "No battle id submitted please submit a hash tag battle id."
 
 
 def clear_load_test():

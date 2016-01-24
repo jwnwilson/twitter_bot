@@ -8,3 +8,5 @@ then
     # fabric so we can use fab commands
     pip install -r requirements.txt
 fi
+
+source /venv/bin/activate
