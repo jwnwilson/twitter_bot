@@ -5,15 +5,16 @@
     Main views for the twitter box
 """
 import json
+import logging
 from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 
-
 from models import HashTagBattle
 from twitter_bot.common import get_hash_tag_most_typos
 
+logger = logging.getLogger(__name__)
 
 def home(request):
     """

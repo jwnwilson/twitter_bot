@@ -17,6 +17,7 @@ class Tweet(models.Model):
     text = models.TextField()
     typos = models.TextField()
     created_at = models.DateTimeField(null=False)
+    hash_tag = models.ForeignKey(HashTag)
 
 
 class HashTagBattle(models.Model):

@@ -5,6 +5,7 @@
 """
 import json
 import pytz
+import logging
 import dateutil.parser
 from datetime import datetime
 from django.utils import timezone
@@ -13,9 +14,11 @@ from enchant.checker import SpellChecker
 from enchant.tokenize import EmailFilter, URLFilter
 from application_only_auth import Client
 from models import Tweet
+from models import HashTag
 import settings
 
 client = Client(settings.TWITTER_CONSUMER_KEY, settings.TWITTER_CONSUMER_SECRET)
+logger = logging.getLogger(__name__)
 
 
 def get_tweet_typos(tweet):
@@ -87,18 +90,31 @@ def get_hash_tag_typos(hash_tag_battle):
 def get_tweets_by_hash_tag(hash_tag, start_date_time, end_data_time):
     """
     Get tweets by hash tag between start and end datetime
+    :param hash_tag: string, hash tag to get tweets for
+    :param start_date_time: datetime, get tweets with created_at older or equal to start_date_time
+    :param end_data_time: datetime, get tweets with created_at before or equal to end_date_time
+    :return: Queryset, tweets returned
+    """
+    tweets = Tweet.objects.filter(hash_tag__hash_tag=hash_tag,
+                                  created_at__gte=start_date_time,
+                                  created_at__lte=end_data_time)
+
+    return tweets
+
+
+def get_tweets_data_for_hash_tag_from_twitter(hash_tag):
+    """
+    Get tweets by hash tag data from twitter
     :param hash_tag:
-    :param start_date_time:
-    :param end_data_time:
     :return:
     """
+    hash_tag = HashTag.objects.get(hash_tag=hash_tag)
     tweets = []
     tweet_objs = []
     base_url = 'https://api.twitter.com/1.1/search/tweets.json'
-    next_url = '?q=%23'+ hash_tag + \
-                '&since='+ start_date_time.strftime('%Y-%m-%d') + \
-                '&until' + end_data_time.strftime('%Y-%m-%d') + \
-                '&lang=en'
+    next_url = '?q=%23'+ hash_tag.hash_tag + '&lang=en'
+
+    logger.info("Getting Tweet data for hashtag: %s" % hash_tag.hash_tag)
 
     while next_url:
         url = base_url + next_url
@@ -110,13 +126,16 @@ def get_tweets_by_hash_tag(hash_tag, start_date_time, end_data_time):
         try:
             tweet_obj = Tweet.objects.get(id_str=tweet.get('id_str'))
         except ObjectDoesNotExist:
-            tweet_obj  = Tweet()
+            tweet_obj = Tweet()
             tweet_obj.id_str = tweet.get('id_str')
             tweet_obj.created_at = dateutil.parser.parse((tweet.get('created_at')))
             tweet_obj.text = tweet.get('text')
+            tweet_obj.hash_tag = hash_tag
             # get the tweet typos
             get_tweet_typos(tweet_obj)
             tweet_obj.save()
         tweet_objs.append(tweet_obj)
+
+    logger.info("Found %s tweets for hashtag: %s" % (len(tweet_objs), hash_tag.hash_tag))
 
     return tweet_objs

@@ -82,7 +82,7 @@ def hash_tag_battle(id):
     :return: None
     """
     if id:
-        local("python ./py_scripts/battle_request.py %s" % id)
+        local("python ./py_scripts/battle_request.py --id %s" % id)
     else:
         print "No battle id submitted please submit a hash tag battle id."
 
