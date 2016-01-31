@@ -49,7 +49,7 @@ else:
             'PORT': 5432,
         }
     }
-if "test" in sys.argv[1]:
+if len(sys.argv) > 1 and "test" in sys.argv[1]:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -67,7 +67,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'twitter_bot',
-    #'social_auth'
+    #'social_auth',
+    'djcelery'
 )
 
 MIDDLEWARE_CLASSES = (
