@@ -110,6 +110,7 @@ def get_tweets_data_for_hash_tag_from_twitter(hash_tag):
     """
     hash_tag = HashTag.objects.get(hash_tag=hash_tag)
     tweets = []
+    new_tweets = 0
     tweet_objs = []
     base_url = 'https://api.twitter.com/1.1/search/tweets.json'
     next_url = '?q=%23'+ hash_tag.hash_tag + '&lang=en'
@@ -134,8 +135,10 @@ def get_tweets_data_for_hash_tag_from_twitter(hash_tag):
             # get the tweet typos
             get_tweet_typos(tweet_obj)
             tweet_obj.save()
+            new_tweets += 1
         tweet_objs.append(tweet_obj)
 
     logger.info("Found %s tweets for hashtag: %s" % (len(tweet_objs), hash_tag.hash_tag))
+    logger.info("Found %s new tweets for hashtag: %s" % (str(new_tweets), hash_tag.hash_tag))
 
     return tweet_objs

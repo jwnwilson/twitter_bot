@@ -43,7 +43,10 @@ def hash_tag_battle(request):
                 return HttpResponse("No hash tag battle found with id: %s" % battle_id, status=500)
 
             hash_tag, hash_tag_data = get_hash_tag_most_typos(hash_tag_battle)
-            return_json = { 'winner': hash_tag.hash_tag, 'typo_data': {}}
+            return_json = { 'winner': None, 'typo_data': {}}
+
+            if hash_tag:
+                return_json['winner'] = hash_tag.hash_tag
 
             for hash_tag in hash_tag_data:
                 return_json['typo_data'][hash_tag.hash_tag] = hash_tag_data[hash_tag]

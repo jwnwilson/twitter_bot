@@ -11,7 +11,7 @@ from .common import get_tweets_data_for_hash_tag_from_twitter
 logger = logging.getLogger(__name__)
 
 
-@periodic_task(run_every=datetime.timedelta(minutes=5))
+@periodic_task(run_every=datetime.timedelta(hours=1))
 def poll_twitter():
     """
     This will poll twitter for all hashtags we have stored and store all hashtags found so we can return
