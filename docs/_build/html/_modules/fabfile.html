@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fabfile &mdash; twitter_bot  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="twitter_bot  documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for fabfile</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Fab file, commands for this application</span>
+
+<span class="sd">@author: Noel Wilson</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="n">local</span>
+
+
+<div class="viewcode-block" id="run_manage"><a class="viewcode-back" href="../fabfile.html#fabfile.run_manage">[docs]</a><span class="k">def</span> <span class="nf">run_manage</span><span class="p">(</span><span class="n">command</span><span class="p">):</span>
+    <span class="n">local</span><span class="p">(</span><span class="s1">&#39;python ./manage.py </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">command</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="web"><a class="viewcode-back" href="../fabfile.html#fabfile.web">[docs]</a><span class="k">def</span> <span class="nf">web</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run a server that will be accessable from inside a container on port 8000</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;runserver 0.0.0.0:8000&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="docker_compose"><a class="viewcode-back" href="../fabfile.html#fabfile.docker_compose">[docs]</a><span class="k">def</span> <span class="nf">docker_compose</span><span class="p">(</span><span class="n">build</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">prod</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start docker compose with django container and postgres container in develop mode</span>
+
+<span class="sd">    :param: build string if &#39;True&#39; rebuild docker image</span>
+<span class="sd">    :param: prod Boolean if &#39;True&#39; then use prod docker compose file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">build</span> <span class="o">==</span> <span class="s1">&#39;True&#39;</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;build&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="s2">&quot;up&quot;</span>
+    <span class="k">if</span> <span class="n">prod</span> <span class="ow">is</span> <span class="s1">&#39;True&#39;</span><span class="p">:</span>
+        <span class="n">compose_file</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">compose_file</span> <span class="o">=</span> <span class="s2">&quot;-f docker-compose-dev.yml&quot;</span>
+
+    <span class="n">local</span><span class="p">(</span><span class="s2">&quot;docker-compose </span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">compose_file</span><span class="p">,</span> <span class="n">cmd</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="docker_ip"><a class="viewcode-back" href="../fabfile.html#fabfile.docker_ip">[docs]</a><span class="k">def</span> <span class="nf">docker_ip</span><span class="p">(</span><span class="n">machine_name</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Print the ip address of docker instance to connect to in a browser</span>
+<span class="sd">    Run with &#39;fab docker_ip:$CONTAINER_ID/CONTAINER_NAME&#39;</span>
+
+<span class="sd">    :param: machine_name: docker image name</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">local</span><span class="p">(</span><span class="s2">&quot;docker-machine ip </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">machine_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="docker_bash"><a class="viewcode-back" href="../fabfile.html#fabfile.docker_bash">[docs]</a><span class="k">def</span> <span class="nf">docker_bash</span><span class="p">(</span><span class="n">machine_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start a shell in the id of the container passed in</span>
+<span class="sd">    Run with &#39;fab docker_bash:$CONTAINER_ID/CONTAINER_NAME&#39;</span>
+
+<span class="sd">    :param: machine_name: docker image name</span>
+<span class="sd">    :return: ip address of docker instance to connect to in a browser</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">machine_name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&quot;No machine name/id passed exiting&quot;</span>
+    <span class="n">local</span><span class="p">(</span><span class="s2">&quot;docker exec -i -t </span><span class="si">%s</span><span class="s2"> bash&quot;</span> <span class="o">%</span> <span class="n">machine_name</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="migrate"><a class="viewcode-back" href="../fabfile.html#fabfile.migrate">[docs]</a><span class="k">def</span> <span class="nf">migrate</span><span class="p">():</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;migrate&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="make_migrations"><a class="viewcode-back" href="../fabfile.html#fabfile.make_migrations">[docs]</a><span class="k">def</span> <span class="nf">make_migrations</span><span class="p">():</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;makemigrations&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="requirements"><a class="viewcode-back" href="../fabfile.html#fabfile.requirements">[docs]</a><span class="k">def</span> <span class="nf">requirements</span><span class="p">():</span>
+    <span class="n">local</span><span class="p">(</span><span class="s1">&#39;pip install -r requirements.txt &#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test"><a class="viewcode-back" href="../fabfile.html#fabfile.test">[docs]</a><span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="create_test_data"><a class="viewcode-back" href="../fabfile.html#fabfile.create_test_data">[docs]</a><span class="k">def</span> <span class="nf">create_test_data</span><span class="p">():</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;dumpdata stream items auth.user --indent 2 &gt; testsite/test_data.json&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="hash_tag_battle"><a class="viewcode-back" href="../fabfile.html#fabfile.hash_tag_battle">[docs]</a><span class="k">def</span> <span class="nf">hash_tag_battle</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the results of a hash tag battle</span>
+
+<span class="sd">    :param: id: battle id of battle created in admin console</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">id</span><span class="p">:</span>
+        <span class="n">local</span><span class="p">(</span><span class="s2">&quot;python ./py_scripts/battle_request.py --id </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&quot;No battle id submitted please submit a hash tag battle id.&quot;</span></div>
+
+
+<div class="viewcode-block" id="generate_docs"><a class="viewcode-back" href="../fabfile.html#fabfile.generate_docs">[docs]</a><span class="k">def</span> <span class="nf">generate_docs</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Auto generate docs settings for this project, will documentation folder in /docs/</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">local</span><span class="p">(</span><span class="s2">&quot;. ./shell_scripts/generate_docs.sh&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="update_docs"><a class="viewcode-back" href="../fabfile.html#fabfile.update_docs">[docs]</a><span class="k">def</span> <span class="nf">update_docs</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rebuild documentation from python doc strings</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">local</span><span class="p">(</span><span class="s2">&quot;make -C ./docs html&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="clear_load_test"><a class="viewcode-back" href="../fabfile.html#fabfile.clear_load_test">[docs]</a><span class="k">def</span> <span class="nf">clear_load_test</span><span class="p">():</span>
+    <span class="c1"># Clear data</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;flush&#39;</span><span class="p">)</span>
+    <span class="c1"># Syncdb</span>
+    <span class="c1">#run_manage(&#39;syncdb&#39;)</span>
+    <span class="c1"># Load Data</span>
+    <span class="n">run_manage</span><span class="p">(</span><span class="s1">&#39;loaddata testsite/test_data.json&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

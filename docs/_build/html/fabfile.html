@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fabfile module &mdash; twitter_bot  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="twitter_bot  documentation" href="index.html" />
+    <link rel="next" title="twitter_bot package" href="twitter_bot.html" />
+    <link rel="prev" title="Welcome to twitter_bot’s documentation!" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-fabfile">
+<span id="fabfile-module"></span><h1>fabfile module<a class="headerlink" href="#module-fabfile" title="Permalink to this headline">¶</a></h1>
+<p>Fab file, commands for this application</p>
+<p>&#64;author: Noel Wilson</p>
+<dl class="function">
+<dt id="fabfile.clear_load_test">
+<code class="descclassname">fabfile.</code><code class="descname">clear_load_test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#clear_load_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.clear_load_test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.create_test_data">
+<code class="descclassname">fabfile.</code><code class="descname">create_test_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#create_test_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.create_test_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.docker_bash">
+<code class="descclassname">fabfile.</code><code class="descname">docker_bash</code><span class="sig-paren">(</span><em>machine_name=''</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#docker_bash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.docker_bash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start a shell in the id of the container passed in
+Run with &#8216;fab docker_bash:$CONTAINER_ID/CONTAINER_NAME&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">machine_name: docker image name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">ip address of docker instance to connect to in a browser</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fabfile.docker_compose">
+<code class="descclassname">fabfile.</code><code class="descname">docker_compose</code><span class="sig-paren">(</span><em>build=None</em>, <em>prod=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#docker_compose"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.docker_compose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start docker compose with django container and postgres container in develop mode</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">build string if &#8216;True&#8217; rebuild docker image</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Param:</th><td class="field-body">prod Boolean if &#8216;True&#8217; then use prod docker compose file</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fabfile.docker_ip">
+<code class="descclassname">fabfile.</code><code class="descname">docker_ip</code><span class="sig-paren">(</span><em>machine_name='default'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#docker_ip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.docker_ip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the ip address of docker instance to connect to in a browser
+Run with &#8216;fab docker_ip:$CONTAINER_ID/CONTAINER_NAME&#8217;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">machine_name: docker image name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fabfile.generate_docs">
+<code class="descclassname">fabfile.</code><code class="descname">generate_docs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#generate_docs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.generate_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auto generate docs settings for this project, will documentation folder in /docs/
+:return: None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fabfile.hash_tag_battle">
+<code class="descclassname">fabfile.</code><code class="descname">hash_tag_battle</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#hash_tag_battle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.hash_tag_battle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the results of a hash tag battle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body">id: battle id of battle created in admin console</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="fabfile.make_migrations">
+<code class="descclassname">fabfile.</code><code class="descname">make_migrations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#make_migrations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.make_migrations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.migrate">
+<code class="descclassname">fabfile.</code><code class="descname">migrate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#migrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.migrate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.requirements">
+<code class="descclassname">fabfile.</code><code class="descname">requirements</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#requirements"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.requirements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.run_manage">
+<code class="descclassname">fabfile.</code><code class="descname">run_manage</code><span class="sig-paren">(</span><em>command</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#run_manage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.run_manage" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.test">
+<code class="descclassname">fabfile.</code><code class="descname">test</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.test" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="fabfile.update_docs">
+<code class="descclassname">fabfile.</code><code class="descname">update_docs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#update_docs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.update_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rebuild documentation from python doc strings
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="fabfile.web">
+<code class="descclassname">fabfile.</code><code class="descname">web</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/fabfile.html#web"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#fabfile.web" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a server that will be accessable from inside a container on port 8000</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to twitter_bot&#8217;s documentation!</a></li>
+      <li>Next: <a href="twitter_bot.html" title="next chapter">twitter_bot package</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fabfile.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/fabfile.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

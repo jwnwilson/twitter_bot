@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>twitter_bot.common &mdash; twitter_bot  documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="twitter_bot  documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for twitter_bot.common</h1><div class="highlight"><pre>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ::Author: Noel Wilson (jwnwilson@hotmai.co.uk)</span>
+
+<span class="sd">    Simple twitter application only based authentication, doesn&#39;t store the access token.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pytz</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">dateutil.parser</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">enchant.checker</span> <span class="kn">import</span> <span class="n">SpellChecker</span>
+<span class="kn">from</span> <span class="nn">enchant.tokenize</span> <span class="kn">import</span> <span class="n">EmailFilter</span><span class="p">,</span> <span class="n">URLFilter</span>
+<span class="kn">from</span> <span class="nn">application_only_auth</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">Tweet</span>
+<span class="kn">from</span> <span class="nn">models</span> <span class="kn">import</span> <span class="n">HashTag</span>
+<span class="kn">import</span> <span class="nn">settings</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">TWITTER_CONSUMER_KEY</span><span class="p">,</span> <span class="n">settings</span><span class="o">.</span><span class="n">TWITTER_CONSUMER_SECRET</span><span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="get_tweet_typos"><a class="viewcode-back" href="../../twitter_bot.html#twitter_bot.common.get_tweet_typos">[docs]</a><span class="k">def</span> <span class="nf">get_tweet_typos</span><span class="p">(</span><span class="n">tweet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a list of typos found in hash_tag string</span>
+<span class="sd">    :param hash_tags:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">chkr</span> <span class="o">=</span> <span class="n">SpellChecker</span><span class="p">(</span><span class="s2">&quot;en_GB&quot;</span><span class="p">,</span><span class="n">filters</span><span class="o">=</span><span class="p">[</span><span class="n">EmailFilter</span><span class="p">,</span><span class="n">URLFilter</span><span class="p">])</span>
+    <span class="n">chkr</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">chkr</span><span class="p">:</span>
+        <span class="n">typos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">word</span><span class="p">)</span>
+
+    <span class="n">tweet</span><span class="o">.</span><span class="n">typos</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">typos</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">typos</span></div>
+
+
+<div class="viewcode-block" id="get_hash_tag_most_typos"><a class="viewcode-back" href="../../twitter_bot.html#twitter_bot.common.get_hash_tag_most_typos">[docs]</a><span class="k">def</span> <span class="nf">get_hash_tag_most_typos</span><span class="p">(</span><span class="n">hash_tag_battle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the hash tag object with the most typos</span>
+<span class="sd">    :param hash_tag_battle:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hash_tag_typos_data</span> <span class="o">=</span> <span class="n">get_hash_tag_typos</span><span class="p">(</span><span class="n">hash_tag_battle</span><span class="p">)</span>
+    <span class="n">most_typos</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">hash_tag_typos</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">winner</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">for</span> <span class="n">hash_tag</span> <span class="ow">in</span> <span class="n">hash_tag_typos_data</span><span class="p">:</span>
+        <span class="n">hash_tag_typos</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">hash_tag_typos_data</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">][</span><span class="s2">&quot;tweets&quot;</span><span class="p">]:</span>
+            <span class="n">hash_tag_typos</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;typos&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">hash_tag_typos</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">most_typos</span><span class="p">:</span>
+            <span class="n">winner</span> <span class="o">=</span> <span class="n">hash_tag</span>
+            <span class="n">most_typos</span> <span class="o">=</span> <span class="n">hash_tag_typos</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">winner</span><span class="p">,</span> <span class="n">hash_tag_typos</span></div>
+
+
+<div class="viewcode-block" id="get_hash_tag_typos"><a class="viewcode-back" href="../../twitter_bot.html#twitter_bot.common.get_hash_tag_typos">[docs]</a><span class="k">def</span> <span class="nf">get_hash_tag_typos</span><span class="p">(</span><span class="n">hash_tag_battle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the hash tag object with the most typos</span>
+<span class="sd">    :param hash_tags:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hash_tags</span> <span class="o">=</span> <span class="n">hash_tag_battle</span><span class="o">.</span><span class="n">hash_tags</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">hash_tags_data</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">hash_tag</span> <span class="ow">in</span> <span class="n">hash_tags</span><span class="p">:</span>
+        <span class="n">hash_tags_data</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;tweets&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="n">tweets</span> <span class="o">=</span> <span class="n">get_tweets_by_hash_tag</span><span class="p">(</span><span class="n">hash_tag</span><span class="o">.</span><span class="n">hash_tag</span><span class="p">,</span>
+                                        <span class="n">hash_tag_battle</span><span class="o">.</span><span class="n">start_date_time</span><span class="p">,</span>
+                                        <span class="n">hash_tag_battle</span><span class="o">.</span><span class="n">end_date_time</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">typos</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">tweet</span><span class="o">.</span><span class="n">typos</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">typos</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="n">tweet_obj</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tweet&#39;</span><span class="p">:</span><span class="n">tweet</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;typos&#39;</span><span class="p">:</span> <span class="n">typos</span><span class="p">}</span>
+            <span class="n">hash_tags_data</span><span class="p">[</span><span class="n">hash_tag</span><span class="p">][</span><span class="s2">&quot;tweets&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tweet_obj</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hash_tags_data</span></div>
+
+
+<div class="viewcode-block" id="get_tweets_by_hash_tag"><a class="viewcode-back" href="../../twitter_bot.html#twitter_bot.common.get_tweets_by_hash_tag">[docs]</a><span class="k">def</span> <span class="nf">get_tweets_by_hash_tag</span><span class="p">(</span><span class="n">hash_tag</span><span class="p">,</span> <span class="n">start_date_time</span><span class="p">,</span> <span class="n">end_data_time</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get tweets by hash tag between start and end datetime</span>
+<span class="sd">    :param hash_tag: string, hash tag to get tweets for</span>
+<span class="sd">    :param start_date_time: datetime, get tweets with created_at older or equal to start_date_time</span>
+<span class="sd">    :param end_data_time: datetime, get tweets with created_at before or equal to end_date_time</span>
+<span class="sd">    :return: Queryset, tweets returned</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tweets</span> <span class="o">=</span> <span class="n">Tweet</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hash_tag__hash_tag</span><span class="o">=</span><span class="n">hash_tag</span><span class="p">,</span>
+                                  <span class="n">created_at__gte</span><span class="o">=</span><span class="n">start_date_time</span><span class="p">,</span>
+                                  <span class="n">created_at__lte</span><span class="o">=</span><span class="n">end_data_time</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">tweets</span></div>
+
+
+<div class="viewcode-block" id="get_tweets_data_for_hash_tag_from_twitter"><a class="viewcode-back" href="../../twitter_bot.html#twitter_bot.common.get_tweets_data_for_hash_tag_from_twitter">[docs]</a><span class="k">def</span> <span class="nf">get_tweets_data_for_hash_tag_from_twitter</span><span class="p">(</span><span class="n">hash_tag</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get tweets by hash tag data from twitter</span>
+<span class="sd">    :param hash_tag:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hash_tag</span> <span class="o">=</span> <span class="n">HashTag</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">hash_tag</span><span class="o">=</span><span class="n">hash_tag</span><span class="p">)</span>
+    <span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">new_tweets</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">tweet_objs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.twitter.com/1.1/search/tweets.json&#39;</span>
+    <span class="n">next_url</span> <span class="o">=</span> <span class="s1">&#39;?q=%23&#39;</span><span class="o">+</span> <span class="n">hash_tag</span><span class="o">.</span><span class="n">hash_tag</span> <span class="o">+</span> <span class="s1">&#39;&amp;lang=en&#39;</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Getting Tweet data for hashtag: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">hash_tag</span><span class="o">.</span><span class="n">hash_tag</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">next_url</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">base_url</span> <span class="o">+</span> <span class="n">next_url</span>
+        <span class="n">page_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">tweets</span> <span class="o">+=</span> <span class="n">page_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;statuses&#39;</span><span class="p">)</span>
+        <span class="n">next_url</span> <span class="o">=</span> <span class="n">page_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;search_metadata&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;next_results&#39;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">tweets</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">tweet_obj</span> <span class="o">=</span> <span class="n">Tweet</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">id_str</span><span class="o">=</span><span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id_str&#39;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">ObjectDoesNotExist</span><span class="p">:</span>
+            <span class="n">tweet_obj</span> <span class="o">=</span> <span class="n">Tweet</span><span class="p">()</span>
+            <span class="n">tweet_obj</span><span class="o">.</span><span class="n">id_str</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id_str&#39;</span><span class="p">)</span>
+            <span class="n">tweet_obj</span><span class="o">.</span><span class="n">created_at</span> <span class="o">=</span> <span class="n">dateutil</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">((</span><span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">)))</span>
+            <span class="n">tweet_obj</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">tweet</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+            <span class="n">tweet_obj</span><span class="o">.</span><span class="n">hash_tag</span> <span class="o">=</span> <span class="n">hash_tag</span>
+            <span class="c1"># get the tweet typos</span>
+            <span class="n">get_tweet_typos</span><span class="p">(</span><span class="n">tweet_obj</span><span class="p">)</span>
+            <span class="n">tweet_obj</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="n">new_tweets</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">tweet_objs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tweet_obj</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%s</span><span class="s2"> tweets for hashtag: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tweet_objs</span><span class="p">),</span> <span class="n">hash_tag</span><span class="o">.</span><span class="n">hash_tag</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Found </span><span class="si">%s</span><span class="s2"> new tweets for hashtag: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_tweets</span><span class="p">),</span> <span class="n">hash_tag</span><span class="o">.</span><span class="n">hash_tag</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">tweet_objs</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

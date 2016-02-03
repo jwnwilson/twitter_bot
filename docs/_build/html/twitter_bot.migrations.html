@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>twitter_bot.migrations package &mdash; twitter_bot  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="twitter_bot  documentation" href="index.html" />
+    <link rel="up" title="twitter_bot package" href="twitter_bot.html" />
+    <link rel="next" title="twitter_bot.tests package" href="twitter_bot.tests.html" />
+    <link rel="prev" title="twitter_bot package" href="twitter_bot.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="twitter-bot-migrations-package">
+<h1>twitter_bot.migrations package<a class="headerlink" href="#twitter-bot-migrations-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-twitter_bot.migrations.0001_initial">
+<span id="twitter-bot-migrations-0001-initial-module"></span><h2>twitter_bot.migrations.0001_initial module<a class="headerlink" href="#module-twitter_bot.migrations.0001_initial" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="twitter_bot.migrations.0001_initial.Migration">
+<em class="property">class </em><code class="descclassname">twitter_bot.migrations.0001_initial.</code><code class="descname">Migration</code><span class="sig-paren">(</span><em>name</em>, <em>app_label</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/migrations/0001_initial.html#Migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.migrations.0001_initial.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0001_initial.Migration.dependencies">
+<code class="descname">dependencies</code><em class="property"> = []</em><a class="headerlink" href="#twitter_bot.migrations.0001_initial.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0001_initial.Migration.operations">
+<code class="descname">operations</code><em class="property"> = [&lt;CreateModel  fields=[(u'id', &lt;django.db.models.fields.AutoField&gt;), (u'hash_tag', &lt;django.db.models.fields.CharField&gt;)], name=u'HashTag'&gt;, &lt;CreateModel  fields=[(u'id', &lt;django.db.models.fields.AutoField&gt;), (u'name', &lt;django.db.models.fields.CharField&gt;), (u'start_date_time', &lt;django.db.models.fields.DateTimeField&gt;), (u'end_date_time', &lt;django.db.models.fields.DateTimeField&gt;), (u'hash_tags', &lt;django.db.models.fields.related.ManyToManyField&gt;)], name=u'HashTagBattle'&gt;, &lt;CreateModel  fields=[(u'id', &lt;django.db.models.fields.AutoField&gt;), (u'start_date_time', &lt;django.db.models.fields.DateTimeField&gt;), (u'end_date_time', &lt;django.db.models.fields.DateTimeField&gt;), (u'battle_data', &lt;django.db.models.fields.TextField&gt;), (u'hash_tag_battle', &lt;django.db.models.fields.related.ForeignKey&gt;), (u'winner', &lt;django.db.models.fields.related.ForeignKey&gt;)], name=u'HashTagBattleResult'&gt;]</em><a class="headerlink" href="#twitter_bot.migrations.0001_initial.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.migrations.0002_tweet">
+<span id="twitter-bot-migrations-0002-tweet-module"></span><h2>twitter_bot.migrations.0002_tweet module<a class="headerlink" href="#module-twitter_bot.migrations.0002_tweet" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="twitter_bot.migrations.0002_tweet.Migration">
+<em class="property">class </em><code class="descclassname">twitter_bot.migrations.0002_tweet.</code><code class="descname">Migration</code><span class="sig-paren">(</span><em>name</em>, <em>app_label</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/migrations/0002_tweet.html#Migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.migrations.0002_tweet.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0002_tweet.Migration.dependencies">
+<code class="descname">dependencies</code><em class="property"> = [(u'twitter_bot', u'0001_initial')]</em><a class="headerlink" href="#twitter_bot.migrations.0002_tweet.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0002_tweet.Migration.operations">
+<code class="descname">operations</code><em class="property"> = [&lt;CreateModel  fields=[(u'id', &lt;django.db.models.fields.AutoField&gt;), (u'id_str', &lt;django.db.models.fields.CharField&gt;), (u'text', &lt;django.db.models.fields.TextField&gt;), (u'created_at', &lt;django.db.models.fields.DateTimeField&gt;)], name=u'Tweet'&gt;]</em><a class="headerlink" href="#twitter_bot.migrations.0002_tweet.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.migrations.0003_tweet_typos">
+<span id="twitter-bot-migrations-0003-tweet-typos-module"></span><h2>twitter_bot.migrations.0003_tweet_typos module<a class="headerlink" href="#module-twitter_bot.migrations.0003_tweet_typos" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="twitter_bot.migrations.0003_tweet_typos.Migration">
+<em class="property">class </em><code class="descclassname">twitter_bot.migrations.0003_tweet_typos.</code><code class="descname">Migration</code><span class="sig-paren">(</span><em>name</em>, <em>app_label</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/migrations/0003_tweet_typos.html#Migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.migrations.0003_tweet_typos.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0003_tweet_typos.Migration.dependencies">
+<code class="descname">dependencies</code><em class="property"> = [(u'twitter_bot', u'0002_tweet')]</em><a class="headerlink" href="#twitter_bot.migrations.0003_tweet_typos.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0003_tweet_typos.Migration.operations">
+<code class="descname">operations</code><em class="property"> = [&lt;AddField  field=&lt;django.db.models.fields.TextField&gt;, preserve_default=False, name=u'typos', model_name=u'tweet'&gt;]</em><a class="headerlink" href="#twitter_bot.migrations.0003_tweet_typos.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.migrations.0004_tweet_hash_tag">
+<span id="twitter-bot-migrations-0004-tweet-hash-tag-module"></span><h2>twitter_bot.migrations.0004_tweet_hash_tag module<a class="headerlink" href="#module-twitter_bot.migrations.0004_tweet_hash_tag" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="twitter_bot.migrations.0004_tweet_hash_tag.Migration">
+<em class="property">class </em><code class="descclassname">twitter_bot.migrations.0004_tweet_hash_tag.</code><code class="descname">Migration</code><span class="sig-paren">(</span><em>name</em>, <em>app_label</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/migrations/0004_tweet_hash_tag.html#Migration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.migrations.0004_tweet_hash_tag.Migration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.migrations.migration.Migration</span></code></p>
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0004_tweet_hash_tag.Migration.dependencies">
+<code class="descname">dependencies</code><em class="property"> = [(u'twitter_bot', u'0003_tweet_typos')]</em><a class="headerlink" href="#twitter_bot.migrations.0004_tweet_hash_tag.Migration.dependencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.migrations.0004_tweet_hash_tag.Migration.operations">
+<code class="descname">operations</code><em class="property"> = [&lt;AddField  field=&lt;django.db.models.fields.related.ForeignKey&gt;, preserve_default=False, name=u'hash_tag', model_name=u'tweet'&gt;]</em><a class="headerlink" href="#twitter_bot.migrations.0004_tweet_hash_tag.Migration.operations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.migrations">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-twitter_bot.migrations" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">twitter_bot.migrations package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.migrations.0001_initial">twitter_bot.migrations.0001_initial module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.migrations.0002_tweet">twitter_bot.migrations.0002_tweet module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.migrations.0003_tweet_typos">twitter_bot.migrations.0003_tweet_typos module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.migrations.0004_tweet_hash_tag">twitter_bot.migrations.0004_tweet_hash_tag module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="twitter_bot.html">twitter_bot package</a><ul>
+      <li>Previous: <a href="twitter_bot.html" title="previous chapter">twitter_bot package</a></li>
+      <li>Next: <a href="twitter_bot.tests.html" title="next chapter">twitter_bot.tests package</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/twitter_bot.migrations.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/twitter_bot.migrations.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

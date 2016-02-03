@@ -1,0 +1,433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>twitter_bot package &mdash; twitter_bot  documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="twitter_bot  documentation" href="index.html" />
+    <link rel="next" title="twitter_bot.migrations package" href="twitter_bot.migrations.html" />
+    <link rel="prev" title="fabfile module" href="fabfile.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="twitter-bot-package">
+<h1>twitter_bot package<a class="headerlink" href="#twitter-bot-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="twitter_bot.migrations.html">twitter_bot.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.migrations.html#module-twitter_bot.migrations.0001_initial">twitter_bot.migrations.0001_initial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.migrations.html#module-twitter_bot.migrations.0002_tweet">twitter_bot.migrations.0002_tweet module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.migrations.html#module-twitter_bot.migrations.0003_tweet_typos">twitter_bot.migrations.0003_tweet_typos module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.migrations.html#module-twitter_bot.migrations.0004_tweet_hash_tag">twitter_bot.migrations.0004_tweet_hash_tag module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.migrations.html#module-twitter_bot.migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="twitter_bot.tests.html">twitter_bot.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.tests.html#module-twitter_bot.tests.functional_tests">twitter_bot.tests.functional_tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="twitter_bot.tests.html#module-twitter_bot.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-twitter_bot.admin">
+<span id="twitter-bot-admin-module"></span><h2>twitter_bot.admin module<a class="headerlink" href="#module-twitter_bot.admin" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-twitter_bot.celery">
+<span id="twitter-bot-celery-module"></span><h2>twitter_bot.celery module<a class="headerlink" href="#module-twitter_bot.celery" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-twitter_bot.common">
+<span id="twitter-bot-common-module"></span><h2>twitter_bot.common module<a class="headerlink" href="#module-twitter_bot.common" title="Permalink to this headline">¶</a></h2>
+<p>::Author: Noel Wilson (<a class="reference external" href="mailto:jwnwilson&#37;&#52;&#48;hotmai&#46;co&#46;uk">jwnwilson<span>&#64;</span>hotmai<span>&#46;</span>co<span>&#46;</span>uk</a>)</p>
+<p>Simple twitter application only based authentication, doesn&#8217;t store the access token.</p>
+<dl class="function">
+<dt id="twitter_bot.common.get_hash_tag_most_typos">
+<code class="descclassname">twitter_bot.common.</code><code class="descname">get_hash_tag_most_typos</code><span class="sig-paren">(</span><em>hash_tag_battle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/common.html#get_hash_tag_most_typos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.common.get_hash_tag_most_typos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the hash tag object with the most typos
+:param hash_tag_battle:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter_bot.common.get_hash_tag_typos">
+<code class="descclassname">twitter_bot.common.</code><code class="descname">get_hash_tag_typos</code><span class="sig-paren">(</span><em>hash_tag_battle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/common.html#get_hash_tag_typos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.common.get_hash_tag_typos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the hash tag object with the most typos
+:param hash_tags:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter_bot.common.get_tweet_typos">
+<code class="descclassname">twitter_bot.common.</code><code class="descname">get_tweet_typos</code><span class="sig-paren">(</span><em>tweet</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/common.html#get_tweet_typos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.common.get_tweet_typos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of typos found in hash_tag string
+:param hash_tags:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter_bot.common.get_tweets_by_hash_tag">
+<code class="descclassname">twitter_bot.common.</code><code class="descname">get_tweets_by_hash_tag</code><span class="sig-paren">(</span><em>hash_tag</em>, <em>start_date_time</em>, <em>end_data_time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/common.html#get_tweets_by_hash_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.common.get_tweets_by_hash_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get tweets by hash tag between start and end datetime
+:param hash_tag: string, hash tag to get tweets for
+:param start_date_time: datetime, get tweets with created_at older or equal to start_date_time
+:param end_data_time: datetime, get tweets with created_at before or equal to end_date_time
+:return: Queryset, tweets returned</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter_bot.common.get_tweets_data_for_hash_tag_from_twitter">
+<code class="descclassname">twitter_bot.common.</code><code class="descname">get_tweets_data_for_hash_tag_from_twitter</code><span class="sig-paren">(</span><em>hash_tag</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/common.html#get_tweets_data_for_hash_tag_from_twitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.common.get_tweets_data_for_hash_tag_from_twitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get tweets by hash tag data from twitter
+:param hash_tag:
+:return:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.models">
+<span id="twitter-bot-models-module"></span><h2>twitter_bot.models module<a class="headerlink" href="#module-twitter_bot.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="twitter_bot.models.HashTag">
+<em class="property">class </em><code class="descclassname">twitter_bot.models.</code><code class="descname">HashTag</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/models.html#HashTag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.models.HashTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Store hash tags that we want to use in battles</p>
+<dl class="exception">
+<dt id="twitter_bot.models.HashTag.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#twitter_bot.models.HashTag.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="twitter_bot.models.HashTag.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">HashTag.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#twitter_bot.models.HashTag.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTag.hashtagbattle_set">
+<code class="descclassname">HashTag.</code><code class="descname">hashtagbattle_set</code><a class="headerlink" href="#twitter_bot.models.HashTag.hashtagbattle_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTag.hashtagbattleresult_set">
+<code class="descclassname">HashTag.</code><code class="descname">hashtagbattleresult_set</code><a class="headerlink" href="#twitter_bot.models.HashTag.hashtagbattleresult_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTag.objects">
+<code class="descclassname">HashTag.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#twitter_bot.models.HashTag.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTag.tweet_set">
+<code class="descclassname">HashTag.</code><code class="descname">tweet_set</code><a class="headerlink" href="#twitter_bot.models.HashTag.tweet_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="twitter_bot.models.HashTagBattle">
+<em class="property">class </em><code class="descclassname">twitter_bot.models.</code><code class="descname">HashTagBattle</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/models.html#HashTagBattle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.models.HashTagBattle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Store hash tag battles with a Many to Many relationship to tags we wish to include in the battle</p>
+<dl class="exception">
+<dt id="twitter_bot.models.HashTagBattle.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#twitter_bot.models.HashTagBattle.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="twitter_bot.models.HashTagBattle.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">HashTagBattle.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#twitter_bot.models.HashTagBattle.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattle.get_next_by_end_date_time">
+<code class="descclassname">HashTagBattle.</code><code class="descname">get_next_by_end_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattle.get_next_by_end_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattle.get_next_by_start_date_time">
+<code class="descclassname">HashTagBattle.</code><code class="descname">get_next_by_start_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattle.get_next_by_start_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattle.get_previous_by_end_date_time">
+<code class="descclassname">HashTagBattle.</code><code class="descname">get_previous_by_end_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattle.get_previous_by_end_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattle.get_previous_by_start_date_time">
+<code class="descclassname">HashTagBattle.</code><code class="descname">get_previous_by_start_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattle.get_previous_by_start_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTagBattle.hash_tags">
+<code class="descclassname">HashTagBattle.</code><code class="descname">hash_tags</code><a class="headerlink" href="#twitter_bot.models.HashTagBattle.hash_tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTagBattle.hashtagbattleresult_set">
+<code class="descclassname">HashTagBattle.</code><code class="descname">hashtagbattleresult_set</code><a class="headerlink" href="#twitter_bot.models.HashTagBattle.hashtagbattleresult_set" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTagBattle.objects">
+<code class="descclassname">HashTagBattle.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#twitter_bot.models.HashTagBattle.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="twitter_bot.models.HashTagBattleResult">
+<em class="property">class </em><code class="descclassname">twitter_bot.models.</code><code class="descname">HashTagBattleResult</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/models.html#HashTagBattleResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Store hash tag battles with a Many to Many relationship to tags we wish to include in the battle</p>
+<dl class="exception">
+<dt id="twitter_bot.models.HashTagBattleResult.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="twitter_bot.models.HashTagBattleResult.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">HashTagBattleResult.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattleResult.get_next_by_end_date_time">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">get_next_by_end_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.get_next_by_end_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattleResult.get_next_by_start_date_time">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">get_next_by_start_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.get_next_by_start_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattleResult.get_previous_by_end_date_time">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">get_previous_by_end_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.get_previous_by_end_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.HashTagBattleResult.get_previous_by_start_date_time">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">get_previous_by_start_date_time</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.get_previous_by_start_date_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTagBattleResult.hash_tag_battle">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">hash_tag_battle</code><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.hash_tag_battle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTagBattleResult.objects">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.HashTagBattleResult.winner">
+<code class="descclassname">HashTagBattleResult.</code><code class="descname">winner</code><a class="headerlink" href="#twitter_bot.models.HashTagBattleResult.winner" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="twitter_bot.models.Tweet">
+<em class="property">class </em><code class="descclassname">twitter_bot.models.</code><code class="descname">Tweet</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/models.html#Tweet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.models.Tweet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>For each hash tag we will be storing tweets for each battle as the twitter API only goes back a week</p>
+<dl class="exception">
+<dt id="twitter_bot.models.Tweet.DoesNotExist">
+<em class="property">exception </em><code class="descname">DoesNotExist</code><a class="headerlink" href="#twitter_bot.models.Tweet.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="twitter_bot.models.Tweet.MultipleObjectsReturned">
+<em class="property">exception </em><code class="descclassname">Tweet.</code><code class="descname">MultipleObjectsReturned</code><a class="headerlink" href="#twitter_bot.models.Tweet.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.Tweet.get_next_by_created_at">
+<code class="descclassname">Tweet.</code><code class="descname">get_next_by_created_at</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.Tweet.get_next_by_created_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="twitter_bot.models.Tweet.get_previous_by_created_at">
+<code class="descclassname">Tweet.</code><code class="descname">get_previous_by_created_at</code><span class="sig-paren">(</span><em>*moreargs</em>, <em>**morekwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#twitter_bot.models.Tweet.get_previous_by_created_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.Tweet.hash_tag">
+<code class="descclassname">Tweet.</code><code class="descname">hash_tag</code><a class="headerlink" href="#twitter_bot.models.Tweet.hash_tag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="twitter_bot.models.Tweet.objects">
+<code class="descclassname">Tweet.</code><code class="descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#twitter_bot.models.Tweet.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.settings">
+<span id="twitter-bot-settings-module"></span><h2>twitter_bot.settings module<a class="headerlink" href="#module-twitter_bot.settings" title="Permalink to this headline">¶</a></h2>
+<p>Django settings for twitter_bot project.</p>
+<p>Generated by &#8216;django-admin startproject&#8217; using Django 1.8.5.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/topics/settings/">https://docs.djangoproject.com/en/1.8/topics/settings/</a></p>
+<p>For the full list of settings and their values, see
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/ref/settings/">https://docs.djangoproject.com/en/1.8/ref/settings/</a></p>
+</div>
+<div class="section" id="module-twitter_bot.tasks">
+<span id="twitter-bot-tasks-module"></span><h2>twitter_bot.tasks module<a class="headerlink" href="#module-twitter_bot.tasks" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="twitter-bot-urls-module">
+<h2>twitter_bot.urls module<a class="headerlink" href="#twitter-bot-urls-module" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-twitter_bot.views">
+<span id="twitter-bot-views-module"></span><h2>twitter_bot.views module<a class="headerlink" href="#module-twitter_bot.views" title="Permalink to this headline">¶</a></h2>
+<p>codeauthor:: Noel Wilson &lt;<a class="reference external" href="mailto:jwnwilson&#37;&#52;&#48;hotmail&#46;co&#46;uk">jwnwilson<span>&#64;</span>hotmail<span>&#46;</span>co<span>&#46;</span>uk</a>&gt;
+Date: 22/01/2016</p>
+<p>Main views for the twitter box</p>
+<dl class="function">
+<dt id="twitter_bot.views.hash_tag_battle">
+<code class="descclassname">twitter_bot.views.</code><code class="descname">hash_tag_battle</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/views.html#hash_tag_battle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.views.hash_tag_battle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple view to get the hash tag battle by id then search for hash tags and
+compare typos in all the tweets
+:param request:
+:return:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="twitter_bot.views.home">
+<code class="descclassname">twitter_bot.views.</code><code class="descname">home</code><span class="sig-paren">(</span><em>request</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/twitter_bot/views.html#home"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#twitter_bot.views.home" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index page to test development on docker
+:param request:
+:return:</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-twitter_bot.wsgi">
+<span id="twitter-bot-wsgi-module"></span><h2>twitter_bot.wsgi module<a class="headerlink" href="#module-twitter_bot.wsgi" title="Permalink to this headline">¶</a></h2>
+<p>WSGI config for twitter_bot project.</p>
+<p>It exposes the WSGI callable as a module-level variable named <code class="docutils literal"><span class="pre">application</span></code>.</p>
+<p>For more information on this file, see
+<a class="reference external" href="https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/">https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/</a></p>
+</div>
+<div class="section" id="module-twitter_bot">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-twitter_bot" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">twitter_bot package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.admin">twitter_bot.admin module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.celery">twitter_bot.celery module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.common">twitter_bot.common module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.models">twitter_bot.models module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.settings">twitter_bot.settings module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.tasks">twitter_bot.tasks module</a></li>
+<li><a class="reference internal" href="#twitter-bot-urls-module">twitter_bot.urls module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.views">twitter_bot.views module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot.wsgi">twitter_bot.wsgi module</a></li>
+<li><a class="reference internal" href="#module-twitter_bot">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="fabfile.html" title="previous chapter">fabfile module</a></li>
+      <li>Next: <a href="twitter_bot.migrations.html" title="next chapter">twitter_bot.migrations package</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/twitter_bot.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+      |
+      <a href="_sources/twitter_bot.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

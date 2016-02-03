@@ -1,3 +1,9 @@
+"""
+Fab file, commands for this application
+
+@author: Noel Wilson
+"""
+
 from fabric.api import local
 
 
@@ -8,7 +14,6 @@ def run_manage(command):
 def web():
     """
     Run a server that will be accessable from inside a container on port 8000
-    :return:
     """
     run_manage('runserver 0.0.0.0:8000')
 
@@ -19,7 +24,6 @@ def docker_compose(build=None, prod=None):
 
     :param: build string if 'True' rebuild docker image
     :param: prod Boolean if 'True' then use prod docker compose file
-    :return: None
     """
     if build == 'True':
         cmd = "build"
@@ -37,8 +41,8 @@ def docker_ip(machine_name="default"):
     """
     Print the ip address of docker instance to connect to in a browser
     Run with 'fab docker_ip:$CONTAINER_ID/CONTAINER_NAME'
-    :param machine_name: docker image name
-    :return: None
+
+    :param: machine_name: docker image name
     """
     local("docker-machine ip %s" % machine_name)
 
@@ -47,7 +51,8 @@ def docker_bash(machine_name=""):
     """
     Start a shell in the id of the container passed in
     Run with 'fab docker_bash:$CONTAINER_ID/CONTAINER_NAME'
-    :param machine_name: docker image name
+
+    :param: machine_name: docker image name
     :return: ip address of docker instance to connect to in a browser
     """
     if machine_name == "":
@@ -78,13 +83,29 @@ def create_test_data():
 def hash_tag_battle(id):
     """
     Get the results of a hash tag battle
-    :param id: battle id of battle created in admin console
-    :return: None
+
+    :param: id: battle id of battle created in admin console
     """
     if id:
         local("python ./py_scripts/battle_request.py --id %s" % id)
     else:
         print "No battle id submitted please submit a hash tag battle id."
+
+
+def generate_docs():
+    """
+    Auto generate docs settings for this project, will documentation folder in /docs/
+    :return: None
+    """
+    local(". ./shell_scripts/generate_docs.sh")
+
+
+def update_docs():
+    """
+    Rebuild documentation from python doc strings
+    :return:
+    """
+    local("make -C ./docs html")
 
 
 def clear_load_test():
